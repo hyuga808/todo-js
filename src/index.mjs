@@ -11,7 +11,13 @@ const onclicikAdd = () => {
 
   // liタグ生成
   const li = document.createElement("li");
-  console.log(li);
+  li.innerText = inputText;
+
+  // divタグの子要素に各要素を設定
+  div.appendChild(li);
+  console.log(div);
+  // // 未完了リストに追加
+  document.getElementById("incompleate-list").appendChild(div);
 };
 
 document
