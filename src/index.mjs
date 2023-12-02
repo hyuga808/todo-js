@@ -5,6 +5,11 @@ const onclicikAdd = () => {
   const inputText = document.getElementById("add-text").value;
   document.getElementById("add-text").value = "";
 
+  createIncompleteTodo(inputText);
+};
+
+// 渡された引数を元に未完了のTODOを作成する処理
+const createIncompleteTodo = (inputText) => {
   // div作成
   const div = document.createElement("div");
   div.className = "list-row";
@@ -24,6 +29,13 @@ const onclicikAdd = () => {
     // 戻すボタンを追加
     const returnButton = document.createElement("button");
     returnButton.innerText = "戻す";
+    returnButton.addEventListener("click", () => {
+      // 戻すボタン押下時の処理
+      const todoText = returnButton.previousElementSibling.innerText;
+      createIncompleteTodo(todoText);
+      // 押されたボタンの親に親にあるliタグを削除
+      returnButton.closest("div").remove();
+    });
     completeTarget.appendChild(returnButton);
     // 完了したtodoリストに追加する
     document.getElementById("complete-list").appendChild(completeTarget);
@@ -45,7 +57,6 @@ const onclicikAdd = () => {
   // // 未完了リストに追加
   document.getElementById("incomplete-list").appendChild(div);
 };
-
 document
   .getElementById("add-button")
   .addEventListener("click", () => onclicikAdd());
