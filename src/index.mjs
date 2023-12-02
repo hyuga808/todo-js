@@ -17,17 +17,23 @@ const onclicikAdd = () => {
   const completeButton = document.createElement("button");
   completeButton.innerText = "完了";
   completeButton.addEventListener("click", () => {
+    // 押された完了ボタンの親にあるdivタグの完了・削除ボタンを未完了リストから削除
     const completeTarget = completeButton.closest("div");
-    console.log(completeTarget);
+    completeTarget.removeChild(completeButton);
+    completeTarget.removeChild(deleteButton);
+    // 戻すボタンを追加
+    const returnButton = document.createElement("button");
+    returnButton.innerText = "戻す";
+    completeTarget.appendChild(returnButton);
+    // 完了したtodoリストに追加する
     document.getElementById("complete-list").appendChild(completeTarget);
-    document.getElementById("incomplete-list").removeChild(completeTarget);
   });
 
   // button(削除)タグ作成
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "削除";
   deleteButton.addEventListener("click", () => {
-    // 押された削除ボタンの親にあるliタグを未完了リストから削除
+    // 押された削除ボタンの親にあるdivタグを未完了リストから削除
     const deleteTarget = deleteButton.closest("div");
     document.getElementById("incomplete-list").removeChild(deleteTarget);
   });
